@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ubicación y Mensaje</title>
+</head>
+<body>
+    <p id="mensaje">Obteniendo ubicación...</p>
+
+    <script>
+        // Hacer una solicitud a ipinfo.io para obtener la información de la ubicación
+        fetch('https://ipinfo.io')
+            .then(response => response.json())
+            .then(data => {
+                // Extraer la ciudad desde la respuesta de ipinfo.io
+                const ciudad = data.city || 'tu Ciudad';
+
+                // Generar un número aleatorio entre 9 y 29
+                const numeroPersonas = Math.floor(Math.random() * (29 - 9 + 1)) + 9;
+
+                // Crear el mensaje
+                const mensaje = `${numeroPersonas} Personas en ${ciudad} están obteniendo sus beneficios`;
+
+                // Mostrar el mensaje en el elemento con el id "mensaje"
+                document.getElementById("mensaje").textContent = mensaje;
+            })
+            .catch(error => {
+                console.error(error);
+                // En caso de error, mostrar un mensaje con número aleatorio y "en tu Ciudad están"
+                const numeroAleatorio = Math.floor(Math.random() * (29 - 9 + 1)) + 9;
+                const mensaje = `${numeroAleatorio} Personas en tu Ciudad están obteniendo sus beneficios`;
+                document.getElementById("mensaje").textContent = mensaje;
+            });
+    </script>
+</body>
+</html>
